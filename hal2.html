@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>Profil Pemilik</title>
+</head>
+<body>
+    <div class="title mb-2">
+        <h1 class="mb-3 mt-3">Profil Pemilik</h1>
+    </div>
+    <div class="poto text-center">
+        <img src="media/frl.jpg" alt="" class="rounded-circle img-thumbnail">
+        <h2>FAREL FARIZI PURNOMOSASI</h2>
+        <p>SMKN 1 PURWOSARI - XI RPL</p>
+    </div>
+ 
+    <div class="kontak text-center">
+        <h3>Contact Me</h3>
+          <div class="ikon-kontak">
+            <a href="https://wa.me/6288226047728" target="_blank"><img src="media/wa.png" alt="" class="ikon"></a>
+            <a href="https://www.instagram.com/farelffp/" target="_blank"><img src="media/ig.png" alt="" class="ikon mid"></a>
+            <a href = "mailto: farel.purnomosasi20@gmail.com" target="_blank"><img src="media/gmail.png" alt="" class="ikon"></a>
+          </div>
+    </div>
+
+    <!--Form-->
+ <section id="Contact">
+  <div class="container kontakto">
+    <div class="row text-center mb-3">
+      <div class="col">
+        <h2>Kotak Pesan</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="alert alert-success alert-dismissible fade show d-none my-alert" role="alert">
+          <strong>TERIMAKASIH</strong> atas sarannya.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <form name="contact-me-portofolio">
+          <div class="mb-3">
+            <label for="Name" class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" id="name" aria-describedby="name" name="nama"/>
+          </div>
+          <div class="mb-3">
+          <label for="jenis" class="form-label">Jenis kelamin</label>
+          <select class="form-select" aria-label="Default select example" name="jenis kelamin">
+            <option selected> </option>
+            <option value="Laki-Laki">Laki-Laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </div>
+
+        <div>
+        <label for="jenis" class="form-label">Profesi</label> <br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="pilih" id="inlineRadio1" value="murid">
+          <label class="form-check-label" for="inlineRadio1">Murid</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="pilih" id="inlineRadio1" value="guru">
+          <label class="form-check-label" for="inlineRadio1">Guru</label>
+        </div>
+      </div>
+    
+      <!-- CheckBox  -->
+        <div class="mb-3 mt-4">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" aria-describedby="email" name="email"/>
+        </div>
+            <div class="mb-3">
+              <label for="pesan" class="form-label">Kritik, Saran & Pesan</label>
+              <textarea class="form-control" id="pesan" rows="3" name="pesan"></textarea>
+            </div>
+          <button type="submit" class="btn btn-primary btn-kirim">Kirim</button>
+          <button class="btn btn-primary btn-loading d-none" type="button" disabled>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </button>
+        </section>
+<!--akhir contact-->
+
+    <!-- Pagination -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-end">
+          <li class="page-item">
+            <a class="page-link" href="index.html">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="index.html">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item disabled">
+            <a class="page-link">Next</a>
+          </li>
+        </ul>
+      </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzEEqKvOZ_bKTUDlgD3a9h16-fW34x1CiXZ5ywgAl8p8aUK0y8RCKWkk8h6shwutLdt/exec'
+      const form = document.forms['contact-me-portofolio']
+      const btnKirim = document.querySelector('.btn-kirim');
+      const btnLoading = document.querySelector('.btn-loading');
+      const myAlert = document.querySelector('.my-alert');
+    
+      form.addEventListener('submit', e => {
+        e.preventDefault()
+        btnLoading.classList.toggle('d-none');
+        btnKirim.classList.toggle('d-none');
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+          .then(response => {
+            btnLoading.classList.toggle('d-none');
+            btnKirim.classList.toggle('d-none');
+            myAlert.classList.toggle('d-none');
+            form.reset();
+            console.log('Success!', response)
+          })
+          .catch(error => console.error('Error!', error.message))
+      })
+    </script>
+</body>
+</html>
